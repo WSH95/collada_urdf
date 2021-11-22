@@ -87,7 +87,7 @@ ament_export_dependencies(COLLADA_DOM)
 ament_export_dependencies(pluginlib)
 ament_export_dependencies(urdf_parser_plugin)
 
-install(TARGETS collada_parser #collada_parser_plugin
+install(TARGETS collada_parser collada_parser_plugin
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin

@@ -1,7 +1,6 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.12.2)
 project(collada_urdf)
-#set(CMAKE_CXX_FLAGS "-O3 -no-pie -Wno-dev")
-unset( CATKIN_INSTALL_INTO_PREFIX_ROOT )
+
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 14)
@@ -9,10 +8,10 @@ endif()
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   # add_compile_options(-Wall -Wextra -Wpedantic -Wnon-virtual-dtor -Woverloaded-virtual)
 endif()
-find_package(ament_cmake REQUIRED)
+
 find_package(ament_cmake_ros REQUIRED)
 find_package(angles REQUIRED)
-find_package(assimp 5.1 REQUIRED)
+find_package(assimp REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system filesystem program_options)
 find_package(COLLADA_DOM 2.4 REQUIRED COMPONENTS 1.5)
 find_package(collada_parser REQUIRED)
@@ -124,7 +123,7 @@ target_include_directories(collada_urdf PUBLIC
   ${Boost_INCLUDE_DIRS}
   ${COLLADA_DOM_INCLUDE_DIRS}
 )
-target_link_libraries(collada_urdf PUBLIC
+target_link_libraries(collada_urdf PRIVATE
   ${Boost_LIBRARIES}
   ${COLLADA_DOM_LIBRARIES}
 )
@@ -182,7 +181,7 @@ install(
   TARGETS collada_urdf urdf_to_collada collada_to_urdf
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
-  RUNTIME DESTINATION lib/${PROJECT_NAME}
+  RUNTIME DESTINATION bin
 )
 
 install(DIRECTORY include/
